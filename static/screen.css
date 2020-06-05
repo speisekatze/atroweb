@@ -1,0 +1,108 @@
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 50vw solid transparent;
+    border-right: 50vw solid transparent;
+    border-top: 100px solid #9907f9;
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+
+  .triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 50vw solid transparent;
+    border-right: 50vw solid transparent;
+    border-bottom: 100px solid #9907f9;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+  .triangle-down2 {
+    width: 2vw;
+    height: 0;
+    border-left: 50vw solid transparent;
+    border-right: 50vw solid transparent;
+    border-radius: 1%;
+    border-top: calc(2px + 100px) solid black;
+    position: fixed;
+    left: -1vw;
+    top: 0;
+  }
+
+  .triangle-up2 {
+    width: 2vw;
+    height: 0;
+    border-left: 50vw solid transparent;
+    border-right: 50vw solid transparent;
+    border-bottom: calc(2px + 100px) solid black;
+    position: fixed;
+    left: -1vw;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  body {
+    background-color: #2e2e2e;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #707070;
+    min-width: 300px;
+    min-height: 600px;
+    overflow: auto;
+  }
+
+  p.footer {
+    position: fixed; 
+    bottom: 0px; 
+    width: 200px;
+    left: calc(50vw - 100px); 
+    text-align: center;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #707070;
+  }
+
+  p.footer a {
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #707070;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  #input {
+    background-color: #1c1c1c;
+  }
+
+  .logo-head {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 25px;
+    left: calc(50vw - 75px);
+    z-index: 10;
+  }
+
+  .logo-foot {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    bottom: 25px;
+    left: calc(50vw - 75px);
+    z-index: 10;
+  }
+
+  .content {
+    border: 5px solid #1c1c1c;
+    height: calc(80vh - 400px);
+    width: 80vw;
+    left: 10vw;
+    top: calc(50vh - ((80vh - 400px)/2));
+    position: fixed;
+    border-radius: 30px;
+    vertical-align: middle;
+    text-align: center;
+  }

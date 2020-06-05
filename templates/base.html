@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ headline }} - {{ seite }} - TOOLS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DBA Tools" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Speisekatze" />
+    {% block meta %}{% endblock meta %}
+    <link rel="shortcut icon" href="" />
+    <link rel="home" href="" />
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static "screen.css" %}" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    {% block link %}{% endblock link %}
+    {% block script %}{% endblock script %}
+  </head>
+  <body>
+    <header>
+      <div class="triangle-down2"><div class="triangle-down"></div></div>
+      <img class="logo-head" src="{% static "images/logo.png" %}" />
+    </header>
+    {% block content %}
+    <p>Placeholder text in base template. Replace with page content.</p>
+    {% endblock content %}
+    <footer id="django" role="contentinfo">
+      <img class="logo-foot" src="{% static "images/logo.png" %}" />
+      <div class="triangle-up2">
+        <div class="triangle-up">
+        </div>
+      </div>
+      <p class="footer">Powered by <a href="http://www.djangoproject.com">Django</a>.</p>
+      </footer>
+  </body>
+</html>

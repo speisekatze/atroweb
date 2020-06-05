@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block script %}
+<script>
+    $( document ).ready(function() {
+        $('#hosts').bind("change", { 
+            msg:"hostchange" 
+        },function(event) { 
+            $('#sucheForm').submit();
+        });
+    });
+</script>
+
+{% endblock script %}
+{% block content %}
+{% if debugmessage %}
+<fieldset>
+    <legend>Debugmessage</legend>
+    <pre>
+    {{debugmessage}}
+    </pre>
+</fieldset>
+{% endif %}
+    <div class="content">
+        <h1>HOMEPAGE</h1>
+    </div>
+{% endblock content %}
