@@ -40,5 +40,6 @@ class Menu(models.Model):
     name = models.CharField(max_length=20, null=False, blank=False)
     slug = models.SlugField()
     url = models.CharField(max_length=100, null=False, blank=False)
+    target = models.CharField(max_length=50, null=False, blank=False, default="_self")
     status = models.IntegerField(default=1)
     sort = models.IntegerField(default=1)
