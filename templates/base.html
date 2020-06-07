@@ -37,7 +37,7 @@
     <header>
       <div class="rect-top"><div class="triangle-down2"><div class="triangle-down"></div></div></div>
       <a href="../"><img class="logo-head" alt="Logo wäre hier" src="{% static "images/logo.webp" %}" /></a>
-      <div class="menu">{% if menu_list %}{% for link in menu_list %}<a href="{{ link.url }}" target="_self">{{ link.name }}</a>&nbsp;{% endfor %}{% endif %}</div>
+      <div class="menu">{% if menu_list %}{% for link in menu_list %}<a href="{{ link.url }}" target="{{ link.target }}">{{ link.name }}</a>&nbsp;{% endfor %}{% endif %}</div>
       <div class="menu2">{{ title }}</div>
     </header>
     {% block content %}
