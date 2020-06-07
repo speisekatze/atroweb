@@ -3,6 +3,9 @@ from django.conf import settings
 from .models import Page, Menu, Faq
 
 
+INDEX_TEMPLATE = 'home/index.html'
+
+
 def get_defaults():
     return {
         'LANGUAGE_CODE': settings.LANGUAGE_CODE,
@@ -11,7 +14,7 @@ def get_defaults():
 
 
 class IndexView(generic.TemplateView):
-    template_name = 'home/index.html'
+    template_name = INDEX_TEMPLATE
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,7 +26,7 @@ class IndexView(generic.TemplateView):
 
 
 class ImpressumView(generic.TemplateView):
-    template_name = 'home/index.html'
+    template_name = INDEX_TEMPLATE
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,7 +38,7 @@ class ImpressumView(generic.TemplateView):
 
 
 class DatenschutzView(generic.TemplateView):
-    template_name = 'home/index.html'
+    template_name = INDEX_TEMPLATE
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
