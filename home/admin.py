@@ -28,7 +28,7 @@ class FaqAdmin(admin.ModelAdmin):
 class MenuAdmin(admin.ModelAdmin):
     list_display = ('slug', 'url', 'status', 'sort')
     list_filter = ('status', )
-    search_fields = ['name',]
+    search_fields = ['name', ]
     prepopulated_fields = {'slug': ('name',)}
 
 
