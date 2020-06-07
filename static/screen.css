@@ -1,108 +1,222 @@
+@font-face{
+  font-family:pricedown;
+  src:url(../static/fonts/pricedown.ttf);
+  font-display: swap;
+}
+@font-face{
+  font-family:SignpainterBold;
+  src:url(../static/fonts/signpainter-bold.woff) format("woff") ,url(../static/fonts/signpainter.ttf) format("truetype");
+  font-display: swap;
+}
+@font-face{
+  font-family:Signpainter;
+  src:url(../static/fonts/signpainter.woff) format("woff"),url(../static/fonts/signpainter.ttf) format("truetype");
+  font-display: swap;
+}
+
+html {
+  min-height: 100%;
+}
+
+.rect-top {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 3px;
+  background-color: black;
+  z-index: -10;
+}
+
+.triangle-down2 {
+  width: 0;
+  height: 0;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-top: 100px solid black;
+  position: relative;
+  left: 0;
+  top: 3px;
+  z-index: -1;
+}
+
 .triangle-down {
-    width: 0;
-    height: 0;
-    border-left: 50vw solid transparent;
-    border-right: 50vw solid transparent;
-    border-top: 100px solid #9907f9;
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
+  width: 0;
+  height: 0;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-top: 100px solid #6e00c2;
+  position: relative;
+  left: -50vw;
+  top: -103px;
+}
 
-  .triangle-up {
-    width: 0;
-    height: 0;
-    border-left: 50vw solid transparent;
-    border-right: 50vw solid transparent;
-    border-bottom: 100px solid #9907f9;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-  }
-  .triangle-down2 {
-    width: 2vw;
-    height: 0;
-    border-left: 50vw solid transparent;
-    border-right: 50vw solid transparent;
-    border-radius: 1%;
-    border-top: calc(2px + 100px) solid black;
-    position: fixed;
-    left: -1vw;
-    top: 0;
-  }
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-bottom: 100px solid #6e00c2;
+  position: relative;
+  left: -50vw;
+  bottom: -3px;
+}
 
-  .triangle-up2 {
-    width: 2vw;
-    height: 0;
-    border-left: 50vw solid transparent;
-    border-right: 50vw solid transparent;
-    border-bottom: calc(2px + 100px) solid black;
-    position: fixed;
-    left: -1vw;
-    bottom: 0;
-    z-index: -1;
-  }
+.triangle-up2 {
+  width: 0;
+  height: 0;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-bottom: 100px solid black;
+  position: relative;
+  left: 0;
+  bottom: 100px;
+  z-index: -1;
+}
 
-  body {
-    background-color: #2e2e2e;
-    margin: 0px;
-    padding: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #707070;
-    min-width: 300px;
-    min-height: 600px;
-    overflow: auto;
-  }
+.rect-bot {
+  position: relative;
+  left: 0;
+  bottom: -115px;
+  width: 100vw;
+  height: 3px;
+  background-color: black;
+  z-index: -10;
+}
 
-  p.footer {
-    position: fixed; 
-    bottom: 0px; 
-    width: 200px;
-    left: calc(50vw - 100px); 
-    text-align: center;
-    font-size: small;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #707070;
-  }
+body {
+  background-color: #2e2e2e;
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #A0A0A0;
+  min-width: 300px;
+  min-height: 100%;
+  overflow: auto;
+}
 
-  p.footer a {
-    font-size: small;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #707070;
-    font-weight: bold;
-    text-decoration: none;
-  }
+.footer {
+  position: relative; 
+  bottom: -49px; 
+  width: 400px;
+  left: calc(50vw - 200px); 
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #101010;
+  font-size: 18px;
+}
 
-  #input {
-    background-color: #1c1c1c;
-  }
+.footer a {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #101010;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
 
-  .logo-head {
-    width: 150px;
-    height: 150px;
-    position: fixed;
-    top: 25px;
-    left: calc(50vw - 75px);
-    z-index: 10;
-  }
+.footer p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
 
-  .logo-foot {
-    width: 150px;
-    height: 150px;
-    position: fixed;
-    bottom: 25px;
-    left: calc(50vw - 75px);
-    z-index: 10;
-  }
+#input {
+  background-color: #1c1c1c;
+}
 
+.logo-head {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  top: 25px;
+  left: calc(50vw - 75px);
+  z-index: 10;
+}
+
+.logo-foot {
+  width: 150px;
+  height: 150px;
+  position: fixed;
+  bottom: 25px;
+  left: calc(50vw - 75px);
+  z-index: 10;
+}
+
+.content {
+  border: 0px solid #1c1c1c;
+  height: calc(100vh - 170px - 105px);
+  /*width: 90vw;
+  left: 10vw;*/
+  top: 13px;
+  position: relative;
+  border-radius: 30px;
+  vertical-align: middle;
+  text-align: center;
+  min-width: 300px;
+  min-height: 400px;
+  overflow: auto;
+}
+
+.content .title {
+  margin-top: 18px;
+  right: 15%;
+  font-weight: bold;
+  font-family: "pricedown", Helvetica;
+  text-align: right;
+  position: relative;
+  color: #af7399;
+}
+
+.page h1 {
+  font-family: "Signpainter", Helvetica;
+  color: #b233b2;
+  text-shadow: 0px 0px 6px black;
+  letter-spacing: 4px;
+}
+
+.page {
+  margin-right: 10%;
+  margin-left: 10%;
+  text-align: right;
+}
+  
+  /* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 95%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1c1c1c;
+  border-radius: 10px;
+}
+
+@media (orientation: landscape) {
   .content {
-    border: 5px solid #1c1c1c;
-    height: calc(80vh - 400px);
-    width: 80vw;
-    left: 10vw;
-    top: calc(50vh - ((80vh - 400px)/2));
-    position: fixed;
-    border-radius: 30px;
-    vertical-align: middle;
-    text-align: center;
+    font-size: 1vw;
   }
+  .content .title {
+    font-size: 4vw;
+  }
+  .page h1 {
+    font-size: 2vw;
+  }
+}
+
+@media (orientation: portrait) {
+  .content {
+    font-size: 1vh;
+  }
+  .content .title {
+    font-size: 4vh;
+  }
+  .page h1 {
+    font-size: 2vh;
+  }
+}

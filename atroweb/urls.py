@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+from markdownx import urls as markdownx
 
 urlpatterns = [
     path('', include('home.urls')),
-    path('cp', include('cp.urls')),
+    path('cp/', include('cp.urls')),
     path('admin/', admin.site.urls),
+    url(r'^markdownx/', include(markdownx))
 ]

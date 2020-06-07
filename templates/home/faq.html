@@ -2,7 +2,13 @@
 {% load static %}
 {% block script %}
 <script>
-
+    $( document ).ready(function() {
+        $('#hosts').bind("change", { 
+            msg:"hostchange" 
+        },function(event) { 
+            $('#sucheForm').submit();
+        });
+    });
 </script>
 
 {% endblock script %}
