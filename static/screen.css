@@ -75,9 +75,9 @@ html {
 }
 
 .rect-bot {
-  position: relative;
+  position: absolute;
   left: 0;
-  bottom: -115px;
+  bottom: 0px;
   width: 100vw;
   height: 3px;
   background-color: black;
@@ -96,8 +96,8 @@ body {
 }
 
 .footer {
-  position: relative; 
-  bottom: -49px; 
+  position: absolute; 
+  bottom: 0px; 
   width: 400px;
   left: calc(50vw - 200px); 
   text-align: center;
@@ -123,15 +123,6 @@ body {
   background-color: #1c1c1c;
 }
 
-.logo-head {
-  width: 150px;
-  height: 150px;
-  position: relative;
-  top: 25px;
-  left: calc(50vw - 75px);
-  z-index: 10;
-}
-
 .logo-foot {
   width: 150px;
   height: 150px;
@@ -143,15 +134,16 @@ body {
 
 .content {
   border: 0px solid #1c1c1c;
-  height: calc(100vh - 170px - 105px);
-  /*width: 90vw;
-  left: 10vw;*/
-  top: 13px;
-  position: relative;
-  border-radius: 30px;
+  height: calc(100vh - 180px - 110px);
+  width: 98vw;
+  left: 1vw;
+  top: 180px;
+  position: absolute;
+  /*border-radius: 30px;*/
   vertical-align: middle;
   text-align: center;
   min-width: 300px;
+  
   min-height: 400px;
   overflow: auto;
 }
@@ -164,6 +156,49 @@ body {
   text-align: right;
   position: relative;
   color: #af7399;
+}
+
+.menu {
+  right: 60vw;
+  /*border: 3px solid #6e00c2;*/
+  border-radius: 10px;
+  font-family: "pricedown", Helvetica;
+  font-weight: normal;
+  font-size: 2.5vw;
+  position: absolute;
+  padding: 5px;
+  vertical-align: middle;
+  height: 3vw;
+  text-align: right;
+}
+
+.menu2 {
+  left: 60vw;
+  font-family: "pricedown", Helvetica;
+  font-weight: normal;
+  font-size: 3vw;
+  position: absolute;
+  padding: 5px;
+  vertical-align: middle;
+  height: 3vw;
+  text-align: right;
+  color: #6e00c2;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #A0A0A0;
+  margin-left: 18px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.menu a:hover{
+  text-decoration: none;
+  font-weight: bold;
+  color: #b233b2;
+  text-shadow: 0px 0px 6px black;
 }
 
 .page h1 {
@@ -218,5 +253,69 @@ body {
   }
   .page h1 {
     font-size: 2vh;
+  }
+}
+
+@media (max-width: 449px) {
+  .logo-head {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    top: 10px;
+    left: calc(50vw - 40px);
+    z-index: 10;
+  }
+  .content {
+    top: 100px;
+    height: calc(100vh - 140px - 80px);
+  }
+  .triangle-down2 {
+    border-top: 50px solid black;
+    z-index: -1;
+  }
+  .triangle-down {
+    border-top: 50px solid #6e00c2;
+    top: -53px;
+  }
+  .triangle-up2 {
+    border-bottom: 50px solid black;
+    z-index: -1;
+    bottom: 50px;
+  }
+  .triangle-up {
+    border-bottom: 50px solid #6e00c2;
+    bottom: -3px;
+  }
+  .menu {
+    top: 50px;
+  }
+  .menu2 {
+    top: 50px;
+  }
+  .footer a {
+    font-size: 8px;
+  }
+  .footer {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 450px) {
+  .logo-head {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    top: 25px;
+    left: calc(50vw - 75px);
+    z-index: 10;
+  }
+  .content {
+    top: 180px;
+  }
+  .menu {
+    top: 100px;
+  }
+  .menu2 {
+    top: 100px;
   }
 }

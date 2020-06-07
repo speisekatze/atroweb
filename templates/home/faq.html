@@ -2,13 +2,7 @@
 {% load static %}
 {% block script %}
 <script>
-    $( document ).ready(function() {
-        $('#hosts').bind("change", { 
-            msg:"hostchange" 
-        },function(event) { 
-            $('#sucheForm').submit();
-        });
-    });
+
 </script>
 
 {% endblock script %}
@@ -22,7 +16,14 @@
 </fieldset>
 {% endif %}
     <div class="content">
-        <div class="title">{{ title }}</div>
-        <div class="page">{{ content |safe }}</div>
+<!--        <div class="title">{{ title }}</div>-->
+        <div class="page">
+            {% if faq_list %}
+            {% for faq in faq_list %}
+            <h1>{{ faq.question |safe }}</h1>
+            <p>{{ faq.answer |safe }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock content %}

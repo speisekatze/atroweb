@@ -37,18 +37,15 @@
     <header>
       <div class="rect-top"><div class="triangle-down2"><div class="triangle-down"></div></div></div>
       <a href="../"><img class="logo-head" alt="Logo wäre hier" src="{% static "images/logo.webp" %}" /></a>
+      <div class="menu">{% if menu_list %}{% for link in menu_list %}<a href="{{ link.url }}" target="_self">{{ link.name }}</a>&nbsp;{% endfor %}{% endif %}</div>
+      <div class="menu2">{{ title }}</div>
     </header>
     {% block content %}
     <p>Placeholder text in base template. Replace with page content.</p>
     {% endblock content %}
     <footer id="django" role="contentinfo">
       <!--<img class="logo-foot" src="{% static "images/logo.png" %}" /> -->
-      <div class="rect-bot">
-        <div class="triangle-up2">
-          <div class="triangle-up">
-          </div>
-        </div>
-      </div>
+      <div class="rect-bot"><div class="triangle-up2"><div class="triangle-up"></div></div></div>
       <div class="footer">
         <p>&copy; Atropity 2020</p>
         <p><a href="/impressum" target="_self">Impressum</a>&nbsp;&VerticalSeparator;&nbsp;<a href="/datenschutz" target="_self">Datenschutzerklärung</a></p>
