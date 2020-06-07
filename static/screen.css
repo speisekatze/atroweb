@@ -152,7 +152,7 @@ body {
   margin-top: 18px;
   right: 15%;
   font-weight: bold;
-  font-family: "pricedown", Helvetica;
+  font-family: "pricedown", Helvetica, sans-serif;
   text-align: right;
   position: relative;
   color: #af7399;
@@ -162,7 +162,7 @@ body {
   right: 60vw;
   /*border: 3px solid #6e00c2;*/
   border-radius: 10px;
-  font-family: "pricedown", Helvetica;
+  font-family: "pricedown", Helvetica, sans-serif;
   font-weight: normal;
   font-size: 2.5vw;
   position: absolute;
@@ -174,7 +174,7 @@ body {
 
 .menu2 {
   left: 60vw;
-  font-family: "pricedown", Helvetica;
+  font-family: "pricedown", Helvetica, sans-serif;
   font-weight: normal;
   font-size: 3vw;
   position: absolute;
@@ -202,7 +202,7 @@ body {
 }
 
 .page h1 {
-  font-family: "Signpainter", Helvetica;
+  font-family: "Signpainter", Helvetica, sans-serif;
   color: #b233b2;
   text-shadow: 0px 0px 6px black;
   letter-spacing: 4px;
