@@ -179,6 +179,7 @@ body {
   font-size: 3vw;
   position: absolute;
   padding: 5px;
+  padding-bottom: 10px;
   vertical-align: middle;
   height: 3vw;
   text-align: right;
@@ -213,7 +214,19 @@ body {
   margin-left: 10%;
   text-align: right;
 }
-  
+
+.social {
+  position: absolute;
+  top: 10px;
+  right: 40vw;
+  width: 20vw;
+  text-align: center;
+  z-index: 20;
+}
+.social .icon img {
+  height: 25px;
+  width: 25px;
+}
   /* width */
 ::-webkit-scrollbar {
   width: 5px;
@@ -297,6 +310,19 @@ body {
   }
   .footer {
     font-size: 8px;
+  }
+  .social .icon {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .social .icon img {
+    height: 25px;
+    width: 25px;
+  }
+  .social {
+    top: 5px;
+    right: 35vw;
+    width: 30vw;
   }
 }
 
@@ -386,5 +412,14 @@ body {
   }
   .menu2 {
     top: 100px;
+  }
+  .social .icon {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+  
+  .social .icon img {
+    height: 50px;
+    width: 50px;
   }
 }
