@@ -39,8 +39,8 @@
       <div class="menu">{% if menu_list %}{% for link in menu_list %}<a href="{{ link.url }}" target="{{ link.target }}">{{ link.name }}</a>&nbsp;{% endfor %}{% endif %}</div>
       <div class="menu2">{{ title }}</div>
       <div class="social">
-        <span class="icon"><a href="https://discord.gg/8zsnAZf" target="_blank"><img alt="discord" src="{% static "images/icons/discord_black.png" %}"/></a></span>
-        <span class="icon"><a href="ts3server://atropity.de/" target="_blank"><img alt="teamspeak" src="{% static "images/icons/ts_black.png" %}"/></a></span>
+        <span class="icon"><a href="https://discord.gg/8zsnAZf" rel="noopener noreferrer" target="_blank"><img alt="discord" src="{% static "images/icons/discord_black.png" %}"/></a></span>
+        <span class="icon"><a href="ts3server://atropity.de/" rel="noopener noreferrer" target="_blank"><img alt="teamspeak" src="{% static "images/icons/ts_black.png" %}"/></a></span>
       </div>
     </header>
     {% block content %}
