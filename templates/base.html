@@ -38,10 +38,6 @@
       <a href="../"><img class="logo-head" alt="Logo wäre hier" src="{% static "images/logo.webp" %}" /></a>
       <div class="menu">{% if menu_list %}{% for link in menu_list %}<a href="{{ link.url }}" target="{{ link.target }}">{{ link.name }}</a>&nbsp;{% endfor %}{% endif %}</div>
       <div class="menu2">{{ title }}</div>
-      <div class="social">
-        <span class="icon"><a href="https://discord.gg/8zsnAZf" rel="noopener noreferrer" target="_blank"><img alt="discord" src="{% static "images/icons/discord_black.png" %}"/></a></span>
-        <span class="icon"><a href="ts3server://atropity.de/" rel="noopener noreferrer" target="_blank"><img alt="teamspeak" src="{% static "images/icons/ts_black.png" %}"/></a></span>
-      </div>
     </header>
     {% block content %}
     <p>Placeholder text in base template. Replace with page content.</p>
@@ -52,6 +48,11 @@
         <p>&copy; Atropity 2020</p>
         <p><a href="/impressum" target="_self">Impressum</a>&nbsp;&VerticalSeparator;&nbsp;<a href="/datenschutz" target="_self">Datenschutzerklärung</a></p>
         <p style="font-size: 8px;">Powered by <a style="font-size: 8px;" href="http://www.djangoproject.com">Django</a>.</p>
+      </div>
+      <div class="social">
+        <span class="icon"><a href="https://discord.gg/8zsnAZf" rel="noopener noreferrer" target="_blank"><img alt="discord" src="{% static "images/icons/discord_white.png" %}"/></a></span>
+        <span class="icon"><a href="ts3server://atropity.de/" rel="noopener noreferrer" target="_blank"><img alt="teamspeak" src="{% static "images/icons/ts_light.png" %}"/></a></span>
+        <span class="icon"><a href="https://twitter.com/AtropityLife" rel="noopener noreferrer" target="_blank"><img alt="twitter" src="{% static "images/icons/twitter.png" %}"/></a></span>
       </div>
       </footer>
   </body>
