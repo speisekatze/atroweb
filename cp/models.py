@@ -16,11 +16,11 @@ class UserModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
     verified_date = models.DateTimeField()
-    verified = models.IntegerField()
+    verified = models.BooleanField()
     verify_sent = models.DateTimeField()
-    verify_token = models.CharField()
+    verify_token = models.CharField(max_length=100)
     password_reset = models.DateTimeField()
-    password_reset_token = models.CharField()
+    password_reset_token = models.CharField(max_length=100)
 
 
 class RolesModel(models.Model):
@@ -32,6 +32,10 @@ class RolesModel(models.Model):
 class UserRolesModel(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     role = models.ForeignKey(RolesModel, on_delete=models.CASCADE)
+    unique_together = (
+        'user',
+        'role',
+    )
 
 
 class RightsModel(models.Model):
@@ -43,11 +47,15 @@ class RightsModel(models.Model):
 class RoleRightsModel(models.Model):
     role = models.ForeignKey(RolesModel, on_delete=models.CASCADE)
     right = models.ForeignKey(RightsModel, on_delete=models.CASCADE)
+    unique_together = (
+        'role',
+        'right',
+    )
 
 
 class UserNotesModel(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='owner')
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
     content = MarkdownxField()
@@ -55,6 +63,10 @@ class UserNotesModel(models.Model):
     admin = models.BooleanField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
+                                   related_name='creator')
+    updated_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
+                                   related_name='updater')
 
     def get_content(self):
         return markdownify(self.content)
@@ -68,16 +80,23 @@ class CharacterModel(models.Model):
 class UserCharacterModel(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     char = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
+    unique_together = (
+        'user',
+        'char',
+    )
 
 
 class UserBanModel(models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='banned_user')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(UserModel)
+    created_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
+                                   related_name='banning_user')
     reason = models.TextField()
     until = models.DateTimeField()
-    parole = models.IntegerField()
-    parole_requested = models.CharField()
-    parole_granted = models.CharField()
-    parole_granted_by = models.ForeignKey(UserModel)
+    parole = models.BooleanField()
+    parole_requested = models.BooleanField()
+    parole_granted = models.BooleanField()
+    parole_granted_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
+                                          related_name='paroler')
+    parole_until = models.DateTimeField()
