@@ -30,6 +30,7 @@ class RolesModel(models.Model):
 
 
 class UserRolesModel(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     role = models.ForeignKey(RolesModel, on_delete=models.CASCADE)
     unique_together = (
@@ -45,6 +46,7 @@ class RightsModel(models.Model):
 
 
 class RoleRightsModel(models.Model):
+    id = models.AutoField(primary_key=True)
     role = models.ForeignKey(RolesModel, on_delete=models.CASCADE)
     right = models.ForeignKey(RightsModel, on_delete=models.CASCADE)
     unique_together = (
@@ -59,8 +61,8 @@ class UserNotesModel(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
     content = MarkdownxField()
-    private = models.BooleanField()
-    admin = models.BooleanField()
+    private = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
@@ -78,6 +80,7 @@ class CharacterModel(models.Model):
 
 
 class UserCharacterModel(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     char = models.ForeignKey(CharacterModel, on_delete=models.CASCADE)
     unique_together = (
@@ -87,6 +90,7 @@ class UserCharacterModel(models.Model):
 
 
 class UserBanModel(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='banned_user')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
@@ -94,9 +98,43 @@ class UserBanModel(models.Model):
                                    related_name='banning_user')
     reason = models.TextField()
     until = models.DateTimeField()
-    parole = models.BooleanField()
-    parole_requested = models.BooleanField()
-    parole_granted = models.BooleanField()
+    parole = models.BooleanField(default=False)
+    parole_requested = models.BooleanField(default=False)
+    parole_granted = models.BooleanField(default=False)
     parole_granted_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
                                           related_name='paroler')
     parole_until = models.DateTimeField()
+
+
+class FragebogenModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='user')
+    created_on = models.DateTimeField(auto_now_add=True)
+    answered_on = models.DateTimeField()
+    application_text = models.TextField()
+    processed_by = models.ForeignKey(UserModel, default=0, on_delete=models.SET_DEFAULT,
+                                     related_name='processing_user')
+
+
+class FragenModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    slug = models.SlugField()
+    text = MarkdownxField()
+
+
+class AntwortenModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, null=False, blank=False)
+    slug = models.SlugField()
+    frage = models.ForeignKey(FragenModel, on_delete=models.CASCADE)
+    text = MarkdownxField()
+    richtig = models.BooleanField(default=0)
+
+
+class FragebogenFragenModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    bogen = models.ForeignKey(FragebogenModel, on_delete=models.CASCADE)
+    frage = models.ForeignKey(FragenModel, on_delete=models.PROTECT)
+    antwort = models.ForeignKey(AntwortenModel, on_delete=models.PROTECT)
+    richtig = models.BooleanField(default=False)
