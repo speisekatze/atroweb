@@ -143,7 +143,7 @@ body {
   vertical-align: middle;
   text-align: center;
   min-width: 300px;
-  
+  animation: title 1s;
   min-height: 400px;
   overflow: auto;
 }
@@ -185,6 +185,7 @@ body {
   text-align: right;
   color: #6e00c2;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  animation: title 0.8s;
 }
 
 .menu a {
@@ -277,6 +278,7 @@ body {
     top: 10px;
     left: calc(50vw - 40px);
     z-index: 10;
+    animation: heartbeat_big 4s infinite;
   }
   .content {
     top: 100px;
@@ -331,10 +333,13 @@ body {
     top: 10px;
     left: calc(50vw - 40px);
     z-index: 10;
+    animation: heartbeat_big 4s infinite;
   }
   .content {
     top: 100px;
-    height: calc(100vh - 140px - 80px);
+    /*height: calc(100vh - 140px - 80px);*/
+    height: calc(100vh - 160px);
+    min-height: calc(100vh - 160px);
   }
   .triangle-down2 {
     border-top: 50px solid black;
@@ -364,6 +369,8 @@ body {
   }
   .footer {
     font-size: 8px;
+    position: absolute; 
+    bottom: -50px; 
   }
   .social .icon {
     margin: 12px;
@@ -375,17 +382,9 @@ body {
   .social {
     right: 30px;
   }
-  .content {
-    height: calc(100vh - 160px);
-    min-height: calc(100vh - 160px);
-  }
   .rect-bot {
     position: absolute;
     bottom: -50px;
-  }
-  .footer {
-    position: absolute; 
-    bottom: -50px; 
   }
 }
 
@@ -397,6 +396,7 @@ body {
     top: 25px;
     left: calc(50vw - 75px);
     z-index: 10;
+    animation: heartbeat_big 4s infinite;
   }
   .content {
     top: 180px;
@@ -415,4 +415,22 @@ body {
     height: 50px;
     width: 50px;
   }
+}
+
+@keyframes heartbeat_big {
+  0% {transform: scale(1);}
+  48% {transform: scale(1);}
+  50% {transform: scale(.98);}
+  55% {transform: scale(1);}
+  78% {transform: scale(1);}
+  80% {transform: scale(1.04);}
+  83% {transform: scale(1);}
+  88% {transform: scale(1.02);}
+  90% {transform: scale(1);}
+  100% {transform: scale(1);}
+}
+
+@keyframes title {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
 }
