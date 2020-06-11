@@ -121,6 +121,7 @@ class FragenModel(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
     text = MarkdownxField()
+    time_to_answer = models.IntegerField(default=30)
 
 
 class AntwortenModel(models.Model):
