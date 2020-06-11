@@ -1,0 +1,83 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, HTML
+from django import forms
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Benutzername")
+    password = forms.CharField(label="Passwort", widget=forms.PasswordInput, min_length=8)
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper
+        self.helper.form_method = 'post'
+        self.helper.form_style = 'inline'
+        self.helper.label_class = 'left'
+        self.helper.field_class = 'left'
+        #self.helper.field_template = 'field.html'
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Login',
+                'username',
+                'password',
+                ButtonHolder(
+                    Submit('submit', 'Senden')
+                )
+            )
+        )
+
+
+class PwResetForm(forms.Form):
+    email = forms.EmailField(label='Email Adresse')
+
+    def __init__(self, *args, **kwargs):
+        super(PwResetForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper
+        self.helper.form_method = 'post'
+        self.helper.form_style = 'inline'
+        self.helper.label_class = 'left'
+        self.helper.field_class = 'left'
+        #self.helper.field_template = 'field.html'
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Passwort zurücksetzen',
+                'email',
+                ButtonHolder(
+                    Submit('submit', 'Senden')
+                )
+            )
+        )
+
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(label='Benutzername')
+    email = forms.EmailField(label='Email Adresse')
+    password_one = forms.CharField(label="Passwort", widget=forms.PasswordInput, min_length=8)
+    password_two = forms.CharField(label="Passwort wiederholen", widget=forms.PasswordInput, min_length=8)
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper
+        self.helper.form_method = 'post'
+        self.helper.form_style = 'inline'
+        self.helper.label_class = 'left'
+        self.helper.field_class = 'left'
+        #self.helper.field_template = 'field.html'
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Registrieren',
+                'email',
+                'username',
+                'password_one',
+                'password_two',
+                ButtonHolder(
+                    Submit('submit', 'Senden')
+                )
+            )
+        )

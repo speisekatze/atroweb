@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block script %}
+<script>
+
+</script>
+
+{% endblock script %}
+{% block content %}
+{% if debugmessage %}
+<fieldset>
+    <legend>Debugmessage</legend>
+    <pre>
+    {{debugmessage}}
+    </pre>
+</fieldset>
+{% endif %}
+    <div class="content">
+        <div class="page">{% crispy form form.helper %}</div>
+        {% if loginpage %}
+        <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&VerticalSeparator;<a href='signup' target='_self'>Registrieren</a></div>
+        {% elif pwrestpage %}
+        <div class="page_helper"><a href='signin' target='_self'>Anmelden</a>&VerticalSeparator;<a href='signup' target='_self'>Registrieren</a></div>
+        {% else %}
+        <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&VerticalSeparator;<a href='signin' target='_self'>Anmelden</a></div>
+        {% endif %}
+    </div>
+{% endblock content %}
