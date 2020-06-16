@@ -26,7 +26,10 @@ with open('config/secret.key') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.2.102', '79.200.226.103']
+ALLOWED_HOSTS = []
+f = open('config/hosts.cnf')
+for x in f:
+    ALLOWED_HOSTS.append(x.strip())
 
 
 # Application definition
