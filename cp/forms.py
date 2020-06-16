@@ -12,9 +12,10 @@ class LoginForm(forms.Form):
 
         self.helper = FormHelper
         self.helper.form_method = 'post'
+        self.helper.form_id = 'register'
         self.helper.form_style = 'inline'
-        self.helper.label_class = 'left'
-        self.helper.field_class = 'left'
+        self.helper.label_class = 'label'
+        self.helper.field_class = 'input'
         #self.helper.field_template = 'field.html'
 
         self.helper.layout = Layout(
@@ -38,8 +39,9 @@ class PwResetForm(forms.Form):
         self.helper = FormHelper
         self.helper.form_method = 'post'
         self.helper.form_style = 'inline'
-        self.helper.label_class = 'left'
-        self.helper.field_class = 'left'
+        self.helper.form_id = 'register'
+        self.helper.label_class = 'label'
+        self.helper.field_class = 'input'
         #self.helper.field_template = 'field.html'
 
         self.helper.layout = Layout(
@@ -62,11 +64,12 @@ class RegisterForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
 
-        self.helper = FormHelper
+        self.helper = FormHelper(self)
         self.helper.form_method = 'post'
+        self.helper.form_id = 'register'
         self.helper.form_style = 'inline'
-        self.helper.label_class = 'left'
-        self.helper.field_class = 'left'
+        self.helper.label_class = 'label'
+        self.helper.field_class = 'input'
         #self.helper.field_template = 'field.html'
 
         self.helper.layout = Layout(
