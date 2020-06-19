@@ -119,19 +119,19 @@ class VerifyView(generic.TemplateView):
     template_name = 'cp/verify.html'
     seite = 'Erfolg'
 
-    def get(self, *args, **kwargs):
-        user_set = helper.find_by_token(kwargs['token'])
-        if user_set is False:
-            return redirect('login')
-        user = user_set[0]
-        user.verified = True
-        user.verified_date = datetime.now()
-        user.verify_token = 'already_used'
-        user.save()
-        return redirect('profile')
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_defaults())
-        context['seite'] = self.seite
+
+        user_set = helper.find_by_token(kwargs['token'])
+        if user_set is not False:
+            user = user_set[0]
+            user.verified = True
+            user.verified_date = datetime.now()
+            user.verify_token = 'already_used'
+            user.save()
+            context['success'] = True
+            context['seite'] = 'Erfolg'
+        else:
+            context['seite'] = 'Fehler'
         return context
