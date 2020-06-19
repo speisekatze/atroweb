@@ -18,13 +18,16 @@
 {% endif %}
     <div class="content">
         <div class="page">
+            {% if errormessage %}
+            <p class="error">{{ errormessage }}</p>
+            {% endif %}
             <div class="page_form">{% crispy form form.helper %}</div>
             {% if loginpage %}
-            <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&VerticalSeparator;<a href='signup' target='_self'>Registrieren</a></div>
+            <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&nbsp;&VerticalSeparator;&nbsp;<a href='signup' target='_self'>Registrieren</a></div>
             {% elif pwrestpage %}
-            <div class="page_helper"><a href='signin' target='_self'>Anmelden</a>&VerticalSeparator;<a href='signup' target='_self'>Registrieren</a></div>
+            <div class="page_helper"><a href='signin' target='_self'>Anmelden</a>&nbsp;&VerticalSeparator;&nbsp;<a href='signup' target='_self'>Registrieren</a></div>
             {% else %}
-            <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&VerticalSeparator;<a href='signin' target='_self'>Anmelden</a></div>
+            <div class="page_helper"><a href='pwlost' target='_self'>Passwort vergessen?</a>&nbsp;&VerticalSeparator;&nbsp;<a href='signin' target='_self'>Anmelden</a></div>
             {% endif %}
         </div>
     </div>
