@@ -1,9 +1,14 @@
 from django.views import generic
 from django.conf import settings
+from django.http import HttpResponse
 from .models import Page, Menu, Faq
 
 
 INDEX_TEMPLATE = 'home/index.html'
+
+
+def go_fuck_yourself(request):
+    return HttpResponse('GO FUCK YOURSELF!')
 
 
 def get_defaults():

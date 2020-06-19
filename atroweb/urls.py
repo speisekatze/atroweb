@@ -19,8 +19,8 @@ from django.conf.urls import url
 from markdownx import urls as markdownx
 
 urlpatterns = [
-    path('', include('home.urls')),
     path('cp/', include('cp.urls')),
     path('admin/', admin.site.urls),
-    url(r'^markdownx/', include(markdownx))
+    url(r'^markdownx/', include(markdownx)),
+    path('', include('home.urls')),
 ]
