@@ -100,7 +100,7 @@ class RegisterFormView(generic.FormView):
         user.salt = generate_salt(6)
         user.password = make_secure(password, user.salt)
         user.save()
-        send_mail('Email Verification', 'The Link to verify your email address: http://79.200.226.103//cp/verify/'+token, 'register@atropity.de', [email])
+        send_mail('Email Verification', 'The Link to verify your email address: http://79.200.226.103/cp/verify/'+token+'/', 'register@atropity.de', [email])
         return super(RegisterFormView, self).form_valid(form)
 
 
