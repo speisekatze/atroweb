@@ -90,12 +90,8 @@ class RegisterFormView(generic.FormView):
 
     def form_valid(self, form):
         username = form.cleaned_data['username']
-        if helper.username_already_used(username):
-            return redirect('cp:register')
-        password = form.cleaned_data['password_two']
         email = form.cleaned_data['email']
-        if helper.email_already_used(email):
-            return redirect('cp:register')
+        password = form.cleaned_data['password']
         token = generate_token()
         user = User(name=username, email=email)
         user.verified = False
