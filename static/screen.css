@@ -215,6 +215,13 @@ body {
   margin-left: 10%;
   text-align: right;
 }
+.page p {
+  text-align: justify;
+}
+.page a {
+  /*text-decoration: solid;*/
+  color: #A0A0A0;
+}
 .btn {
   margin-top: 16px;
   margin-bottom: 16px;
@@ -236,11 +243,11 @@ body {
   outline: none;
   border: none;
 }
-fieldset.inline {
+fieldset.inline, fieldset.inlineLabels {
   border: none;
   text-align: center;
 }
-fieldset.inline legend {
+fieldset.inline legend, fieldset.inlineLabels legend {
   text-align: right;
 }
 .form-group {
@@ -249,6 +256,16 @@ fieldset.inline legend {
 .page_form {
   width: 80vw;
 }
+div.input {
+  height: 39px;
+}
+
+span.invalid-feedback {
+  position: relative;
+  top: -62px;
+  display: flow-root;
+}
+
 .label {
   text-align: right;
   width: 40vw;
@@ -270,7 +287,7 @@ fieldset.inline legend {
   padding: 8px 5px;
   display: inline-block;
 }
-.form-control:valid {
+.form-control:not(.is-invalid):valid {
   border: none;
   outline: none;
   box-shadow: 0px 0px 5px 5px #6e00c2;
@@ -284,6 +301,11 @@ fieldset.inline legend {
   border: none;
   outline: none;
   box-shadow: 0px 0px 5px 5px #b233b2;
+}
+.is-invalid {
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 5px 5px #e233b2;
 }
 .page_helper {
   color: #A0A0A0;
@@ -333,7 +355,7 @@ fieldset.inline legend {
     font-size: 4vw;
   }
   .page h1,legend {
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }
 
@@ -478,7 +500,7 @@ fieldset.inline legend {
     animation: heartbeat_big 4s infinite;
   }
   .content {
-    top: 180px;
+    top: 190px;
   }
   .menu {
     top: 100px;
