@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'cp'
 urlpatterns = [
-    path('', views.LoginFormView.as_view(), name='login'),
+    path('', views.LoginFormView.as_view(), name='index'),
     path('pwlost', views.PwResetFormView.as_view(), name='reset'),
     path('signup', views.RegisterFormView.as_view(), name='register'),
     path('signin', views.LoginFormView.as_view(), name='login'),
