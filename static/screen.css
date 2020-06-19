@@ -232,6 +232,10 @@ body {
   color: #1c1c1c;
   background-color: #b233b2;
 }
+.btn:focus {
+  outline: none;
+  border: none;
+}
 fieldset.inline {
   border: none;
   text-align: center;
