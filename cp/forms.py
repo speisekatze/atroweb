@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django import forms
+from .models import User
 
 
 class LoginForm(forms.Form):
@@ -52,6 +53,12 @@ class PwResetForm(forms.Form):
             )
         )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Die angegebene Adresse ist unbekannt.")
+        return email
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Benutzername')
@@ -82,3 +89,28 @@ class RegisterForm(forms.Form):
                 )
             )
         )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Die Email-Adresse wird bereits genutzt.")
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(name=username).exists():
+            raise forms.ValidationError("Der Name ist bereits vergeben.")
+        return username
+
+    def clean(self):
+        form_data = self.cleaned_data
+        if form_data['password_one'] != form_data['password_two']:
+            self._errors["password_one"] = ["Die Passwörter stimmen nicht überein."]
+            self._errors["password_two"] = ["Die Passwörter stimmen nicht überein."]
+            del form_data['password_one']
+            del form_data['password_two']
+        else:
+            form_data['password'] = form_data['password_one']
+            del form_data['password_one']
+            del form_data['password_two']
+        return form_data
