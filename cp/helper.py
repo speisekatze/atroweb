@@ -39,3 +39,10 @@ def find_by_token(token):
     if len(user) < 1:
         return False
     return user
+
+
+def find_by_mail(email):
+    user = User.objects.all().filter(email__iexact=email)
+    if len(user) < 1:
+        return False
+    return user

@@ -5,9 +5,9 @@ from django.conf import settings
 from django.shortcuts import redirect
 from home.models import Menu
 from .models import User
-from .forms import LoginForm, PwResetForm, RegisterForm
+from .forms import LoginForm, PwResetForm, RegisterForm, NewPasswordForm
 from .token import generate_token, generate_salt, make_secure
-from . import helper
+from .helper import find_by_mail, find_by_token
 
 
 def get_defaults():
@@ -46,12 +46,6 @@ class LoginFormView(generic.FormView):
         return context
 
     def form_valid(self, form):
-        username = form.cleaned_data['username']
-        if not helper.is_verified(username):
-            return redirect('cp:login')
-        password = form.cleaned_data['password']
-        if not helper.check_password(username, password):
-            return redirect('cp:login')
         return super(LoginFormView, self).form_valid(form)
 
 
@@ -70,6 +64,18 @@ class PwResetFormView(generic.FormView):
         context['seite'] = self.seite
         context['pwrestpage'] = True
         return context
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        token = generate_token()
+        user_set = find_by_mail(email)
+        if user_set is not False:
+            user = user_set[0]
+            user.password_reset = datetime.now()
+            user.password_reset_token = token
+            user.save()
+            send_mail('Password reset Notification', 'The Link to reset your password: http://79.200.226.103/cp/reset/'+token+'/', 'register@atropity.de', [email])
+        return super(RegisterFormView, self).form_valid(form)
 
 
 class RegisterFormView(generic.FormView):
@@ -123,7 +129,7 @@ class VerifyView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context.update(get_defaults())
 
-        user_set = helper.find_by_token(kwargs['token'])
+        user_set = find_by_token(kwargs['token'])
         if user_set is not False:
             user = user_set[0]
             user.verified = True
@@ -135,3 +141,33 @@ class VerifyView(generic.TemplateView):
         else:
             context['seite'] = 'Fehler'
         return context
+
+
+class NewPasswdView(generic.FormView):
+    template_name = 'cp/login.html'
+    seite = 'Neues Passwort'
+    form_class = NewPasswordForm
+    success_url = 'register'
+
+    def __init__(self, *args, **kwargs):
+        super(NewPasswordForm, self).__init__(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_defaults())
+        context['seite'] = self.seite
+        context['signuppage'] = True
+        user_set = find_by_token(kwargs['token'])
+        if user_set is not False:
+            context['success'] = True
+        else:
+            context['success'] = False
+            context['seite'] = 'Fehler'
+        return context
+
+    def form_valid(self, form):
+        password = form.cleaned_data['password']
+        
+        user.password = make_secure(password, user.salt)
+        user.save()
+        return redirect('profile')

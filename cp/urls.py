@@ -9,5 +9,6 @@ urlpatterns = [
     path('signup', views.RegisterFormView.as_view(), name='register'),
     path('signin', views.LoginFormView.as_view(), name='login'),
     path('register', views.RegisterResultView.as_view(), name='register_result'),
-    path('verify/<str:token>/', views.VerifyView.as_view(), name='verify')
+    path('verify/<str:token>/', views.VerifyView.as_view(), name='verify'),
+    path('reset/<str:token>/', views.NewPasswdView.as_view(), name='newpw')
 ]

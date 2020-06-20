@@ -114,3 +114,43 @@ class RegisterForm(forms.Form):
             del form_data['password_one']
             del form_data['password_two']
         return form_data
+
+
+class NewPasswordForm(forms.Form):
+    password_one = forms.CharField(label="Passwort", widget=forms.PasswordInput, min_length=8)
+    password_two = forms.CharField(label="Passwort wiederholen", widget=forms.PasswordInput,
+                                   min_length=8)
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.form_method = 'post'
+        self.helper.form_id = 'register'
+        self.helper.form_style = 'inline'
+        self.helper.label_class = 'label'
+        self.helper.field_class = 'input'
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Neues Passwort',
+                'password_one',
+                'password_two',
+                ButtonHolder(
+                    Submit('submit', 'Senden')
+                )
+            )
+        )
+
+    def clean(self):
+        form_data = self.cleaned_data
+        if form_data['password_one'] != form_data['password_two']:
+            self._errors["password_one"] = ["Die Passwörter stimmen nicht überein."]
+            self._errors["password_two"] = ["Die Passwörter stimmen nicht überein."]
+            del form_data['password_one']
+            del form_data['password_two']
+        else:
+            form_data['password'] = form_data['password_one']
+            del form_data['password_one']
+            del form_data['password_two']
+        return form_data
