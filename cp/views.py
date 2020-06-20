@@ -129,7 +129,7 @@ class VerifyView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context.update(get_defaults())
 
-        user_set = find_by_token(kwargs['token'])
+        user_set = find_by_token(kwargs['token'], 0)
         if user_set is not False:
             user = user_set[0]
             user.verified = True
@@ -138,6 +138,22 @@ class VerifyView(generic.TemplateView):
             user.save()
             context['success'] = True
             context['seite'] = 'Erfolg'
+        else:
+            context['seite'] = 'Fehler'
+        return context
+
+
+class VerifyPwTokenView(generic.TemplateView):
+    template_name = 'cp/verify.html'
+    seite = 'Erfolg'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_defaults())
+
+        user_set = find_by_token(kwargs['token'], 1)
+        if user_set is not False:
+            return redirect('newpw')
         else:
             context['seite'] = 'Fehler'
         return context
@@ -157,12 +173,6 @@ class NewPasswdView(generic.FormView):
         context.update(get_defaults())
         context['seite'] = self.seite
         context['signuppage'] = True
-        user_set = find_by_token(kwargs['token'])
-        if user_set is not False:
-            context['success'] = True
-        else:
-            context['success'] = False
-            context['seite'] = 'Fehler'
         return context
 
     def form_valid(self, form):
