@@ -2,6 +2,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django import forms
 from .models import User
+from .token import make_secure
 
 
 class LoginForm(forms.Form):
@@ -28,6 +29,24 @@ class LoginForm(forms.Form):
                 )
             )
         )
+
+    def clean(self):
+        form_data = self.cleaned_data
+        pw = form_data['password']
+        username = form_data['username']
+        uname = User.objects.filter(email=username)
+        mail = User.objects.filter(name=username)
+        user = None
+        if uname.exists():
+            user = uname[0]
+        if mail.exists():
+            user = mail[0]
+        if make_secure(pw, user.salt) != user.password:
+            user = None
+        if user is None:
+            self._errors["username"] = ["Benutzername unbekannt oder "]
+            self._errors["password"] = ["Passwort ist falsch."]
+        return {'user': user}
 
 
 class PwResetForm(forms.Form):
@@ -120,9 +139,10 @@ class NewPasswordForm(forms.Form):
     password_one = forms.CharField(label="Passwort", widget=forms.PasswordInput, min_length=8)
     password_two = forms.CharField(label="Passwort wiederholen", widget=forms.PasswordInput,
                                    min_length=8)
+    uid = forms.CharField(widget=forms.HiddenInput)
 
     def __init__(self, *args, **kwargs):
-        super(RegisterForm, self).__init__(*args, **kwargs)
+        super(NewPasswordForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
@@ -136,6 +156,7 @@ class NewPasswordForm(forms.Form):
                 'Neues Passwort',
                 'password_one',
                 'password_two',
+                'uid',
                 ButtonHolder(
                     Submit('submit', 'Senden')
                 )

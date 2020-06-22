@@ -22,6 +22,8 @@
             {% if success %}
             <p>Dein Account wurde verifiziert.</p>
             <p><a href="{% url 'cp:login' %}">Hier gehts zum Login.</a></p>
+            {% elif successmail %}
+            <p>Die Mail zum zurücksetzen des Passwortes wurde versendet</p>
             {% else %}
             <p>Ein Fehler ist aufgetreten.</p>
             <p>Entweder ist der Link abgelaufen oder der Account wurde bereits aktiviert.</p>

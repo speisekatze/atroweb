@@ -3,6 +3,7 @@ from .token import make_secure
 
 TOKEN_TYPE = ('verify', 'reset')
 
+
 def username_already_used(username):
     user = User.objects.all().filter(name__iexact=username)
     print(user)
@@ -36,12 +37,16 @@ def check_password(username, password):
 
 
 def find_by_token(token, type):
-    if TOKEN_TYPE[type] != 'verify':
+    if token and len(token) < 86:
+        return False
+    user = None
+    if TOKEN_TYPE[type] == 'verify':
         user = User.objects.all().filter(verify_token__iexact=token)
-    elif TOKEN_TYPE[type] != 'reset':
+    elif TOKEN_TYPE[type] == 'reset':
         user = User.objects.all().filter(password_reset_token__iexact=token)
     else:
         return False
+    print(user)
     if len(user) < 1:
         return False
     return user

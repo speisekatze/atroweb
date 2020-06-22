@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
     socialclub_id = models.CharField(max_length=50, null=True, blank=False)
@@ -22,6 +22,7 @@ class User(models.Model):
     password_reset = models.DateTimeField(null=True)
     password_reset_token = models.CharField(max_length=100, null=True)
     salt = models.CharField(max_length=10)
+    session_token = models.CharField(max_length=100, null=True)
 
 
 class Roles(models.Model):

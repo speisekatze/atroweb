@@ -264,6 +264,7 @@ span.invalid-feedback {
   position: relative;
   top: -62px;
   display: flow-root;
+  color: orangered;
 }
 
 .label {

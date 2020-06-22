@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block script %}
+<script>
+
+</script>
+
+{% endblock script %}
+{% block content %}
+{% if debugmessage %}
+<fieldset>
+    <legend>Debugmessage</legend>
+    <pre>
+    {{debugmessage}}
+    </pre>
+</fieldset>
+{% endif %}
+    <div class="content">
+        <div class="page">
+            <h1>{{seite}}</h1>
+Hallo {{user.name}}
+        </div>
+    </div>
+{% endblock content %}
