@@ -229,16 +229,20 @@ class NewPasswdView(generic.FormView):
 class ProfileView(generic.TemplateView):
     template_name = 'cp/profile.html'
     seite = 'Profil'
+    user = None
+
+    def get(self, *args, **kwargs):
+        user_set = User.objects.all().filter(id=self.request.session.get('uid'))
+        if len(user_set) < 1:
+            return redirect('cp:signin')
+        self.user = user_set[0]
+        if self.user.session_token != self.request.session.get('token'):
+            return redirect('cp:signin')
+        return super().get(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_set = User.objects.filter(id=self.request.session.get('uid'))
-        if user_set is None:
-            return redirect('login')
-        user = user_set[0]
-        if user.session_token != self.request.session.get('token'):
-            return redirect('login')
         context.update(get_defaults())
         context['seite'] = self.seite
-        context['user'] = user
+        context['user'] = self.user
         return context
