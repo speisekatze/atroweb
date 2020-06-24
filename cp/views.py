@@ -96,6 +96,9 @@ class PwResetFormView(generic.FormView):
             user = user_set[0]
             user.password_reset = timezone.now()
             user.password_reset_token = token
+            user.session_token = ''
+            self.request.session.delete('token')
+            self.request.session.delete('uid')
             user.save()
             send_mail('Password reset Notification', 'The Link to reset your password: http://79.200.226.103/cp/reset/'+token+'/', 'register@atropity.de', [email])
         return super(PwResetFormView, self).form_valid(form)
@@ -217,7 +220,7 @@ class NewPasswdView(generic.FormView):
         uid = form.cleaned_data['uid']
         user_set = User.objects.all().filter(id=uid)
         if user_set is None:
-            return redirect('login')
+            return redirect('cp:signin')
         user = user_set[0]
         user.salt = generate_salt(6)
         user.password = make_secure(password, user.salt)
