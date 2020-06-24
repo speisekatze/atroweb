@@ -57,3 +57,7 @@ def find_by_mail(email):
     if len(user) < 1:
         return False
     return user
+
+
+def is_admin(user):
+    return user.has_role('admin')

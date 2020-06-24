@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
     socialclub_id = models.CharField(max_length=50, null=True, blank=False)
@@ -24,11 +24,48 @@ class User(models.Model):
     salt = models.CharField(max_length=10)
     session_token = models.CharField(max_length=100, null=True)
 
+    def has_role(self, role_name):
+        role = Roles.objects.all().filter(name=role_name)[0]
+        return UserRoles.objects.all().filter(user=self.id, role=role).exists()
+
+    def has_right(self, right_name):
+        user_roles = UserRoles.objects.all().filter(user=self.id)
+        for ur in user_roles:
+            if ur.role.has_right(right_name):
+                return True
+        return False
+
+    def get_rights(self):
+        user_roles = UserRoles.objects.all().filter(user=self.id)
+        rights = []
+        for ur in user_roles:
+            for r in ur.role.get_rights():
+                rights.append(r)
+        return rights
+
+    def list_rights(self):
+        rights = self.get_rights()
+        rlist = []
+        for r in rights:
+            rlist.append(r.name)
+        return rlist
+
 
 class Roles(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False, blank=False)
     slug = models.SlugField()
+
+    def has_right(self, right_name):
+        r = Rights.objects.all().filter(name=right_name)[0]
+        return RoleRights.objects.all().filter(role=self.id, right=r).exists()
+
+    def get_rights(self):
+        role_rights = RoleRights.objects.all().filter(role=self.id)
+        rights = []
+        for rr in role_rights:
+            rights.append(rr.right)
+        return rights
 
 
 class UserRoles(models.Model):

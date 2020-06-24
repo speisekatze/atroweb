@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import redirect, render
 from home.models import Menu
-from .models import User
+from .models import User, Roles, UserRoles
 from .forms import LoginForm, PwResetForm, RegisterForm, NewPasswordForm
 from .token import generate_token, generate_salt, make_secure, gen_unique
 from .helper import find_by_mail, find_by_token
@@ -175,6 +175,9 @@ class VerifyView(generic.TemplateView):
             user.verified_date = timezone.now()
             user.verify_token = 'already_used'
             user.save()
+            role = Roles.objects.all().filter(name='user')[0]
+            ur = UserRoles(user=user, role=role)
+            ur.save()
             context['success'] = True
             context['seite'] = 'Erfolg'
         else:
@@ -248,4 +251,5 @@ class ProfileView(generic.TemplateView):
         context.update(get_defaults())
         context['seite'] = self.seite
         context['user'] = self.user
+        context['debugmessage'] = self.user.list_rights()
         return context
