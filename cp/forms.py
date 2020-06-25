@@ -3,6 +3,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from django import forms
 from .models import User
 from .token import make_secure
+import bcrypt
 
 
 class LoginForm(forms.Form):
@@ -41,7 +42,7 @@ class LoginForm(forms.Form):
             user = uname[0]
         if mail.exists():
             user = mail[0]
-        if make_secure(pw, user.salt) != user.password:
+        if not bcrypt.checkpw(pw.encode(), user.password.encode()):
             user = None
         if user is None:
             self._errors["username"] = ["Benutzername unbekannt oder "]

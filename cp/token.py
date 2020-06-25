@@ -1,7 +1,6 @@
 import secrets
 import os
-import base64
-import hashlib
+import bcrypt
 
 
 def generate_token():
@@ -9,7 +8,7 @@ def generate_token():
 
 
 def generate_salt(size=6):
-    return base64.b64encode(os.urandom(size)).decode('utf-8')
+    return bcrypt.gensalt().decode('utf-8')
 
 
 def gen_unique(size=6):
@@ -17,6 +16,8 @@ def gen_unique(size=6):
 
 
 def make_secure(password, salt):
-    h = hashlib.sha3_512()
-    h.update((salt + password).encode())
-    return h.hexdigest()
+    return bcrypt.hashpw(password.encode(), salt.encode()).decode('utf-8')
+
+
+def check_pw(pw, hash):
+    return bcrypt.checkpw(pw.encode(), hash)

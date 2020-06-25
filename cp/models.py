@@ -21,7 +21,7 @@ class User(models.Model):
     verify_token = models.CharField(max_length=100, null=True)
     password_reset = models.DateTimeField(null=True)
     password_reset_token = models.CharField(max_length=100, null=True)
-    salt = models.CharField(max_length=10)
+    salt = models.CharField(max_length=50)
     session_token = models.CharField(max_length=100, null=True)
 
     def has_role(self, role_name):
