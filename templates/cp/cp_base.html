@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block script %}
+<script>
+
+</script>
+
+{% endblock script %}
+{% block content %}
+{% if debugmessage %}
+<fieldset>
+    <legend>Debugmessage</legend>
+    <pre>
+    {{debugmessage}}
+    </pre>
+</fieldset>
+{% endif %}
+    <div class="content">
+        <div class="page">
+            <div class="cp_menu">
+                <ul>
+                    <li>Profile</li>
+                    <li>Server</li>
+                    <li>User</li>
+                    <li>Whitelist</li>
+                </ul>
+            </div>
+            <div class="cp_content">
+                {% block cp_content %}
+                <p>Placeholder text in base template. Replace with page content.</p>
+                {% endblock cp_content %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

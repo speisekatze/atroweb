@@ -1,25 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'cp/cp_base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block script %}
-<script>
 
-</script>
-
-{% endblock script %}
-{% block content %}
-{% if debugmessage %}
-<fieldset>
-    <legend>Debugmessage</legend>
-    <pre>
-    {{debugmessage}}
-    </pre>
-</fieldset>
-{% endif %}
-    <div class="content">
-        <div class="page">
+{% block cp_content %}
             <h1>{{seite}}</h1>
 Hallo {{user.name}}
-        </div>
-    </div>
-{% endblock content %}
+{% endblock cp_content %}
