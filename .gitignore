@@ -2,3 +2,4 @@ config/my.cnf
 *.pyc
 config/secret.key
 config/hosts.cnf
+config/api.json
