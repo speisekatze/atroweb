@@ -9,6 +9,7 @@ from .models import User, Roles, UserRoles
 from .forms import LoginForm, PwResetForm, RegisterForm, NewPasswordForm
 from .token import generate_token, generate_salt, make_secure, gen_unique
 from .helper import find_by_mail, find_by_token
+from .api import api
 
 
 def get_defaults():
@@ -251,5 +252,7 @@ class ProfileView(generic.TemplateView):
         context.update(get_defaults())
         context['seite'] = self.seite
         context['user'] = self.user
-        context['debugmessage'] = self.user.list_rights()
+        a = api('altv')
+        char = a.get('chars', [1])
+        context['debugmessage'] = char['response'][0]['charname']
         return context
